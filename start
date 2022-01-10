@@ -1,0 +1,30 @@
+
+
+
+useradd -mr pbsadmin
+
+##License
+
+
+#Enviorment
+export PBS_DATA_SERVICE_USER=pbsadmin
+export PATH=$PATH:/usr/local/altair/licensing14.5/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/altair/licensing14.5/bin
+
+
+
+almutil -licstat
+/etc/init.d/altairlmxd restart
+
+
+rpm -ivh pbspro-server-2021.1.2.20210913160841-0.el8.x86_64.rpm
+PBS_DATA_SERVICE_USER=pbsadmin /etc/init.d/pbs start
+
+qmgr -c "set server pbs_license_info = 6200@server11 "
+qstat -Bf | grep license
+
+source /etc/pbsworks-pa.conf
+export PATH=$PATH:/data/usr/local/altair/licensing14.5/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/usr/local/altair/licensing14.5/bin
+
+
