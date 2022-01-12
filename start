@@ -1,7 +1,8 @@
 
 
-
+#Step 1 :User Creation 
 useradd -mr pbsadmin
+password
 
 ##License
 
