@@ -18,20 +18,22 @@ wget https://raw.githubusercontent.com/atulyadavtech/help/master/ssh.sh -O /etc/
 wget https://raw.githubusercontent.com/atulyadavtech/help/master/ssh.csh -O /etc/profile.d/ssh.csh
 
 #SSH Fine tunning 
-/etc/ssh/ssh_config
-Host *
-   CheckHostIP no
-   StrictHostKeyChecking no
-   UserKnownHostsFile=/dev/null
-   LogLevel error
-
+wget  https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/ssh_config  -O ->> /etc/ssh/ssh_config
 echo "X11UseLocalhost no" >> /etc/ssh/sshd_config
 echo "AddressFamily inet" >> /etc/ssh/sshd_config
 echo "UseDNS no" >> /etc/ssh/sshd_config
 
 
+
+#Remove initial screen 
+/etc/gdm/custom.conf
+[daemon]
+InitialSetupEnable=False
+
+#Remove the ssh login msg
 mv cockpit insights-client bkp/
 
+#Python linking 
 ln -s /usr/bin/python3 /usr/bin/python
 
 
@@ -41,8 +43,7 @@ chmod 1777 -R  /scratch
 
 
 #Package
-yum install xauth xterm network-scripts mlocate ipmitool nmap yum-plugin-changelog 
-
+yum install -y xauth xterm network-scripts mlocate ipmitool nmap yum-plugin-changelog 
 
 #Services
 systemctl disable rhsmcertd.service ModemManager.service cups bluetooth firewalld NetworkManager
@@ -52,7 +53,6 @@ systemctl mask firewalld;systemctl stop firewalld;yum -y install iptables-servic
 sync
 iptables --list;iptables --flush;iptables --delete-chain;service iptables save
 
-
 ## Disable Virtual Interface  (optional)
 virsh net-undefine default;chkconfig libvirtd off;systemctl disable libvirtd.service
 
@@ -60,13 +60,13 @@ virsh net-undefine default;chkconfig libvirtd off;systemctl disable libvirtd.ser
 timedatectl set-timezone Asia/Kolkata
 timedatectl set-ntp yes
 
-#Hostname Verfiycation 
+#Hostname verification  
 hostnamectl status
 hostname -A;hostname -d;hostname -f;hostname -i;hostname -I
 
 
 
-##License
+
 
 
 
@@ -80,11 +80,10 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 
 
 
-
+##License
 
 #Enviorment
 /etc/profile.d/altair.sh
-
 export PATH=$PATH:/usr/local/altair/licensing14.5/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/altair/licensing14.5/bin
 source /etc/pbsworks-pa.conf
