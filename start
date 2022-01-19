@@ -1,16 +1,94 @@
 
 
+
+OS preapration 
 #Step 1 :User Creation 
-useradd -mr pbsadmin
-password
+useradd -mr pbsdata
+echo "password"  | passwd --stdin pbsdata
+useradd pbsadmin
+echo "password"  | passwd --stdin pbsadmin
+
+#Selinux disable
+sed -i 's/=enforcing/=disabled/' /etc/selinux/config
+
+##Config File 
+wget https://raw.githubusercontent.com/atulyadavtech/ganana/master/limits.conf -O /etc/security/limits.conf
+wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/history-sh -O /etc/profile.d/altair.sh
+wget https://raw.githubusercontent.com/atulyadavtech/help/master/ssh.sh -O /etc/profile.d/ssh.sh
+wget https://raw.githubusercontent.com/atulyadavtech/help/master/ssh.csh -O /etc/profile.d/ssh.csh
+
+#SSH Fine tunning 
+/etc/ssh/ssh_config
+Host *
+   CheckHostIP no
+   StrictHostKeyChecking no
+   UserKnownHostsFile=/dev/null
+   LogLevel error
+
+echo "X11UseLocalhost no" >> /etc/ssh/sshd_config
+echo "AddressFamily inet" >> /etc/ssh/sshd_config
+echo "UseDNS no" >> /etc/ssh/sshd_config
+
+
+mv cockpit insights-client bkp/
+
+ln -s /usr/bin/python3 /usr/bin/python
+
+
+#Directory Structure
+mkdir -p /scratch /home/stage
+chmod 1777 -R  /scratch
+
+
+#Package
+yum install xauth xterm network-scripts mlocate ipmitool nmap yum-plugin-changelog 
+
+
+#Services
+systemctl disable rhsmcertd.service ModemManager.service cups bluetooth firewalld NetworkManager
+
+#Firewall
+systemctl mask firewalld;systemctl stop firewalld;yum -y install iptables-services;systemctl enable iptables;systemctl start iptables
+sync
+iptables --list;iptables --flush;iptables --delete-chain;service iptables save
+
+
+## Disable Virtual Interface  (optional)
+virsh net-undefine default;chkconfig libvirtd off;systemctl disable libvirtd.service
+
+#TimeZone Setup
+timedatectl set-timezone Asia/Kolkata
+timedatectl set-ntp yes
+
+#Hostname Verfiycation 
+hostnamectl status
+hostname -A;hostname -d;hostname -f;hostname -i;hostname -I
+
+
 
 ##License
 
 
+
+
+Network naming convention
+sed -i -e 's/quiet/quiet net.ifnames=0 biosdevname=0/' /etc/default/grub
+mkdir /root/test; mv /etc/sysconfig/network-scripts/ifcfg-e* /root/test/
+wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/ifcfg-eth0  -O /etc/sysconfig/network-scripts/ifcfg-eth0
+wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/ifcfg-eth1  -O /etc/sysconfig/network-scripts/ifcfg-eth1
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+
+
+
+
 #Enviorment
-export PBS_DATA_SERVICE_USER=pbsadmin
+/etc/profile.d/altair.sh
+
 export PATH=$PATH:/usr/local/altair/licensing14.5/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/altair/licensing14.5/bin
+source /etc/pbsworks-pa.conf
+
 
 
 
@@ -19,13 +97,10 @@ almutil -licstat
 
 
 rpm -ivh pbspro-server-2021.1.2.20210913160841-0.el8.x86_64.rpm
-PBS_DATA_SERVICE_USER=pbsadmin /etc/init.d/pbs start
+/etc/init.d/pbs start
 
 qmgr -c "set server pbs_license_info = 6200@server11 "
 qstat -Bf | grep license
 
-source /etc/pbsworks-pa.conf
-export PATH=$PATH:/data/usr/local/altair/licensing14.5/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/usr/local/altair/licensing14.5/bin
 
 
