@@ -1,0 +1,20 @@
+Dell 
+
+
+
+https://dl.dell.com/FOLDER07415032M/1/OM-SrvAdmin-Dell-Web-LX-10.1.0.0-4561.RHEL8.x86_64_A00.tar.gz?uid=8f3a2854-24db-419e-7435-5826527430d2&fn=OM-SrvAdmin-Dell-Web-LX-10.1.0.0-4561.RHEL8.x86_64_A00.tar.gz
+
+
+https://dl.dell.com/FOLDER07423496M/1/DellEMC-iDRACTools-Web-LX-10.1.0.0-4566_A00.tar.gz?uid=9cc64df9-8fcd-44b1-4acf-3c2e0d9758d3&fn=DellEMC-iDRACTools-Web-LX-10.1.0.0-4566_A00.tar.gz
+
+
+
+
+omconfig system esmlog action=clear
+omconfig system alertlog action=clear
+
+omreport chassis biossetup
+
+
+BIOS Setup 
+omconfig chassis biossetup attribute=cstates setting=disabled
