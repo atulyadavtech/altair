@@ -1,0 +1,6 @@
+
+pbsnodes -aSj
+
+qstat -Bf
+
+pbs_hostn -v  hostane ## Troubleshooting
