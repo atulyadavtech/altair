@@ -16,6 +16,7 @@ wget https://raw.githubusercontent.com/atulyadavtech/ganana/master/limits.conf -
 wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/history-sh -O /etc/profile.d/altair.sh
 wget https://raw.githubusercontent.com/atulyadavtech/help/master/ssh.sh -O /etc/profile.d/ssh.sh
 wget https://raw.githubusercontent.com/atulyadavtech/help/master/ssh.csh -O /etc/profile.d/ssh.csh
+wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/master-80-systcl.conf -O /etc/sysctl.d/90-master-sysctl.conf
 
 #SSH Fine tunning 
 wget  https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/ssh_config  -O ->> /etc/ssh/ssh_config
