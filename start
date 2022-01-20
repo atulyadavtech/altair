@@ -31,7 +31,7 @@ echo "UseDNS no" >> /etc/ssh/sshd_config
 InitialSetupEnable=False
 
 #Remove the ssh login msg
-mv cockpit insights-client bkp/
+rm -rfv /etc/motd.d/*
 
 #Python linking 
 ln -s /usr/bin/python3 /usr/bin/python
@@ -39,6 +39,7 @@ ln -s /usr/bin/python3 /usr/bin/python
 
 #Directory Structure
 mkdir -p /scratch /home/stage
+mkdir -p /altair/hw
 chmod 1777 -R  /scratch
 
 
