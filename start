@@ -1,7 +1,7 @@
 
 
 
-OS preapration 
+##OS preapration 
 #Step 1 :User Creation 
 useradd -mr pbsdata
 echo "password"  | passwd --stdin pbsdata
