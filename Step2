@@ -17,3 +17,6 @@ rpm -ivh pbspro-server-2021.1.2.20210913160841-0.el8.x86_64.rpm
 
 qmgr -c "set server pbs_license_info = 6200@server11 "
 qstat -Bf | grep license
+
+
+test1
