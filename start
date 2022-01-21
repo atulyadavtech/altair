@@ -28,10 +28,7 @@ echo "UseDNS no" >> /etc/ssh/sshd_config
 
 
 #Remove initial screen 
-/etc/gdm/custom.conf
-[daemon]
-InitialSetupEnable=False
-
+sed -i '/daemon/a InitialSetupEnable=False' /etc/gdm/custom.conf
 
 #Remove the ssh login msg
 rm -rfv /etc/motd.d/*
