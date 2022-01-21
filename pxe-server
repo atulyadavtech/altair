@@ -1,0 +1,2 @@
+yum install dnsmasq httpd -y
+systemctl restart dnsmasq httpd
