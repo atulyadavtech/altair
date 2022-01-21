@@ -75,8 +75,7 @@ hostname -A;hostname -d;hostname -f;hostname -i;hostname -I
 
 
 #Network naming convention
-sed -i -e 's/quiet/quiet net.ifnames=0 biosdevname=0/' /etc/default/grub
+wget -O - https://raw.githubusercontent.com/atulyadavtech/lipi/main/ethx | bash 
 mkdir /root/test; mv /etc/sysconfig/network-scripts/ifcfg-e* /root/test/
 wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/ifcfg-eth0  -O /etc/sysconfig/network-scripts/ifcfg-eth0
 wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/ifcfg-eth1  -O /etc/sysconfig/network-scripts/ifcfg-eth1
-grub2-mkconfig -o /boot/grub2/grub.cfg
