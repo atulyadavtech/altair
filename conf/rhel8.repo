@@ -1,0 +1,17 @@
+[BaseOS]
+name=rhel8.2-media1-BOS
+baseurl=file:///altair/media/rhel8.2/media1/BaseOS
+enabled=1
+gpgcheck=0
+
+[AppStream]
+name=rhel8.2-media1-AS
+baseurl=file:///altair/media/rhel8.2/media1/AppStream
+enabled=1
+gpgcheck=0
+
+[Supplementary]
+name=rhel8.2-media2-supplementary
+baseurl=file:///altair/media/rhel8.2/media2
+enabled=0
+gpgcheck=0
