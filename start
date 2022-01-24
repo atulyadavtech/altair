@@ -106,3 +106,8 @@ wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/ifcfg-eth
 wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/ifcfg-eth1  -O /etc/sysconfig/network-scripts/ifcfg-eth1
 systemctl enable network
 touch /etc/sysconfig/disable-deprecation-warnings
+#Validation
+getenforce
+timedatectl
+hostnamectl
+uname -a
