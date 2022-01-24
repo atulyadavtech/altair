@@ -6,6 +6,7 @@ echo "password"  | passwd --stdin pbsdata
 useradd pbsadmin
 echo "password"  | passwd --stdin pbsadmin
 
+cp /boot/initramfs-$(uname -r).img /boot/initramfs-$(uname -r).bak.$(date +%m-%d-%H%M%S).img
 
 chmod +x /etc/rc.d/rc.local
 
@@ -39,10 +40,6 @@ baseurl=file:///altair/media/rhel8.2/media2
 enabled=0
 gpgcheck=0
 EOF
-
-
-
-
 
 ##Config File 
 wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/limits.conf -O /etc/security/limits.conf
