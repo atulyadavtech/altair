@@ -21,6 +21,10 @@ mkdir -p /altair/hw
 chmod 1777 -R  /scratch
 
 # YUM Repo
+umount /dev/sr0
+mount /dev/sr0 /media
+cp -rfv /media/* /altair/os/rhel8.2/media1/
+
 cat >/etc/yum.repos.d/altair.repo << EOF
 [BaseOS]
 name=rhel8.2-media1-BOS
