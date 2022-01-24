@@ -15,8 +15,8 @@ sed -i 's/=enforcing/=disabled/' /etc/selinux/config
 
 #Directory Structure
 mkdir -p /scratch /home/stage
-mkdir -p /altair/media/rhel8.2/media1/
-mkdir -p /altair/media/rhel8.2/media2/
+mkdir -p /altair/os/rhel8.2/media1/
+mkdir -p /altair/os/rhel8.2/media2/
 mkdir -p /altair/hw
 chmod 1777 -R  /scratch
 
@@ -24,19 +24,19 @@ chmod 1777 -R  /scratch
 cat >/etc/yum.repos.d/altair.repo << EOF
 [BaseOS]
 name=rhel8.2-media1-BOS
-baseurl=file:///altair/media/rhel8.2/media1/BaseOS
+baseurl=file:///altair/os/rhel8.2/media1/BaseOS
 enabled=1
 gpgcheck=0
 
 [AppStream]
 name=rhel8.2-media1-AS
-baseurl=file:///altair/media/rhel8.2/media1/AppStream
+baseurl=file:///altair/os/rhel8.2/media1/AppStream
 enabled=1
 gpgcheck=0
 
 [Supplementary]
 name=rhel8.2-media2-supplementary
-baseurl=file:///altair/media/rhel8.2/media2
+baseurl=file:///altair/os/rhel8.2/media2
 enabled=0
 gpgcheck=0
 EOF
