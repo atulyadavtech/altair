@@ -7,8 +7,41 @@ useradd pbsadmin
 echo "password"  | passwd --stdin pbsadmin
 
 
+chmod +x /etc/rc.d/rc.local
+
 #Selinux disable
 sed -i 's/=enforcing/=disabled/' /etc/selinux/config
+
+#Directory Structure
+mkdir -p /scratch /home/stage
+mkdir -p /altair/media/rhel8.2/media1/
+mkdir -p /altair/media/rhel8.2/media2/
+mkdir -p /altair/hw
+chmod 1777 -R  /scratch
+
+# YUM Repo
+cat >/etc/yum.repos.d/altair.repo << EOF
+[BaseOS]
+name=rhel8.2-media1-BOS
+baseurl=file:///altair/media/rhel8.2/media1/BaseOS
+enabled=1
+gpgcheck=0
+
+[AppStream]
+name=rhel8.2-media1-AS
+baseurl=file:///altair/media/rhel8.2/media1/AppStream
+enabled=1
+gpgcheck=0
+
+[Supplementary]
+name=rhel8.2-media2-supplementary
+baseurl=file:///altair/media/rhel8.2/media2
+enabled=0
+gpgcheck=0
+EOF
+
+
+
 
 
 ##Config File 
@@ -17,7 +50,7 @@ wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/history-s
 wget https://raw.githubusercontent.com/atulyadavtech/help/master/ssh.sh -O /etc/profile.d/ssh.sh
 wget https://raw.githubusercontent.com/atulyadavtech/help/master/ssh.csh -O /etc/profile.d/ssh.csh
 wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/master-80-systcl.conf -O /etc/sysctl.d/90-master-sysctl.conf
-wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/rhel8.repo -O /etc/yum.repos.d/altair.repo
+#wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/rhel8.repo -O /etc/yum.repos.d/altair.repo
 
 
 #SSH Fine tunning 
@@ -38,12 +71,7 @@ rm -rfv /etc/motd.d/*
 ln -s /usr/bin/python3 /usr/bin/python
 
 
-#Directory Structure
-mkdir -p /scratch /home/stage
-mkdir -p /altair/media/rhel8.2/media1/
-mkdir -p /altair/media/rhel8.2/media2/
-mkdir -p /altair/hw
-chmod 1777 -R  /scratch
+
 
 
 #Package
