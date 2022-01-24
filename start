@@ -47,7 +47,6 @@ wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/history-s
 wget https://raw.githubusercontent.com/atulyadavtech/help/master/ssh.sh -O /etc/profile.d/ssh.sh
 wget https://raw.githubusercontent.com/atulyadavtech/help/master/ssh.csh -O /etc/profile.d/ssh.csh
 wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/master-80-systcl.conf -O /etc/sysctl.d/90-master-sysctl.conf
-#wget https://raw.githubusercontent.com/atulyadavtech/Conf-Files/master/rhel8.repo -O /etc/yum.repos.d/altair.repo
 
 
 #SSH Fine tunning 
