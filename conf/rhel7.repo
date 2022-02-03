@@ -1,0 +1,11 @@
+[OS]
+name=rhel7.x-media1
+baseurl=file:///altair/media/rhell7.6/media1
+enabled=1
+gpgcheck=0
+
+[Supplementary]
+name=rhel7.x-media2-supplementary
+baseurl=file:///altair/media/rhel7.6/media2
+enabled=0
+gpgcheck=0
