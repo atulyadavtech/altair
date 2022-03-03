@@ -6,6 +6,9 @@ echo "password"  | passwd --stdin pbsdata
 useradd pbsadmin
 echo "password"  | passwd --stdin pbsadmin
 
+hostnamectl status # Hostname verification
+hostname -A;hostname -d;hostname -f;hostname -i;hostname -I # Hostname verification
+
 cp /boot/initramfs-$(uname -r).img /boot/initramfs-$(uname -r).bak.$(date +%m-%d-%H%M%S).img
 
 chmod +x /etc/rc.d/rc.local
